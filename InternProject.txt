@@ -1,0 +1,64 @@
+Intern  Project: Rotation Alg.
+
+Problems:
+	- How many people tend to no show for a given day? 
+		- Could cause a lot of manual assigning
+	- How to display onto screen when scanned?
+	- How to know when an associate clocks in OR when badge is scanned (either can work)
+	- Which roles need to be assigned first?
+	- What if associate is on leave, PTO, or vacation?
+	- Accommodations??
+
+
+Basic Process:
+	1  - Input what roles are needed for the day, how many for each role
+	2  - Read excel sheet with Associate ID, Name, and Roles (Hours worked in that role as well)
+	3  - Assign using algorithm (Need to formulate)
+	4  - Create second spreadsheet 
+		- Add the Associate ID, Name, Role for the day, and add how many hours worked in that role
+	5  - Create a way to show people that haven't shown up
+		- Maybe through clockin or badge not scanned
+	6  - Allow for PA/AM to edit new spreadsheet to correct hours and roles for the day as needed
+		- When associate gets moved/pulled (Allows for best role rotation)
+	7  - Auto run when lunch time; new spreadsheet will be created for second quarter of the day 
+		- Maybe edit old one??
+		- Might not need auto run function, could just manually run again
+	8  - Repeat step 5 and 6
+	9  - Edit spreadsheet at end of shift for correct time and roles for next day usage
+	10 - Reset hour count when reached a certain threshhold??
+	11 - Remember to save the spreadsheet daily, preferably by multiple people so data not lost for next day
+
+
+Features Needed: 
+	- Rerun fuction to run the alg again if needed at any given time
+	- Highlight or somehow show the associates that haven't came
+	- Maybe create a prioity system
+		- Certain associates have priority after a certain rotation
+	- Easy usability, simple
+	- Associate scans badge and told where to go
+		- Extra will be told to "Report to your PA/AM"
+	- Add a priority tab in the excel sheet which specifies the perferred role
+		- Auto set to N/A, but can be edited by a manager (Should carry on to new spreadsheet)
+
+
+Algorithm:
+	- Look at what is needed
+	- Create a pool of associates that still need the hours 
+	- Assign from that pool
+	- If more needed, choose using priority (Maybe some people are prefered for certain things)
+	- If no priority, auto choose from entire pool
+	- Move to next role and repeat
+	- Repeat till done for all roles
+	- Who ever left in the pool will be auto told to report to a manager
+
+
+Implementation Calender Guideline: (Subject to Change)
+	- Week 7/5 - 7/8 = Figure out logistics, meet with IT to know if all this possible
+	- Week 7/12 - 7/15 = Prime week; start coding process when possible, work out certain stuff when able
+	- Week 7/19 - 7/22 = Get data before project implemented; get set up for next week usage
+		- Hopefully implement on Friday 7/21 to see how it rolls out, Backup = Saturday 7/22
+	- Week 7/26 - 7/29 = Implement fully and record data; use the prior Friday role out to fix bugs/issues
+	- Week 8/2 - 8/5 = ??
+	- Week 8/9 - 8/12 = Keep rolling out, fix whatever issues come, finalize
+	- Week 8/16 - 8/19 = Finalize everything, present to leadership
+	- Week 8/23 - 8/25 = ??
