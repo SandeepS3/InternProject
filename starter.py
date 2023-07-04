@@ -2,9 +2,10 @@
 
 # Libraries Needed
 # import pandas as pd
-import openpyxl
 # import re
+import openpyxl
 import time
+import random
 
 # namelst = []
 # #dataframe1 = pd.read_excel('test.xlsx')
@@ -43,13 +44,41 @@ import time
 
 # Start
 
-# Currently 19 roles
-lst = ["RSRTD", "RSRPS", "RSRWS", "RSROP", "Decanters", "DecantPS", "DecantWS", "DockRun", "DockCRun",
-       "DockLL", "DockCPB", "DockDS", "DockPD", "DockLI", "DockIDRT", "DockUPPC", "DockPS", "DockCrets", "Clerk"]
-priolst = ["Clerk", "RSRTD", "RSROP", "DecantPS", "DockPD", "DockIDRT", "DockPS", "DoctCrets"]
+# Currently 19 roles total
+lst = [
+    "RSRTD",
+    "RSRPS",
+    "RSRWS",
+    "RSROP",
+    "Decanters",
+    "DecantPS",
+    "DecantWS",
+    "DockRun",
+    "DockCRun",
+    "DockLL",
+    "DockCPB",
+    "DockDS",
+    "DockPD",
+    "DockLI",
+    "DockIDRT",
+    "DockUPPC",
+    "DockPS",
+    "DockCrets",
+    "Clerk",
+]
+priolst = [
+    "Clerk",
+    "RSRTD",
+    "RSROP",
+    "DecantPS",
+    "DockPD",
+    "DockIDRT",
+    "DockPS",
+    "DoctCrets",
+]
+
+
 # Might still have to ask which day of the week it is
-
-
 def startup():
     numofroles = input("How many roles will be used today? ")
     roles = {}
@@ -57,23 +86,65 @@ def startup():
     # Running Through which roles are needed and how many for them
     for num in range(int(numofroles)):
         rolename = input("What is the role name? ")
-        while (True):
-            if (rolename in lst):
+        while True:
+            if rolename in lst:
                 break
             print("Invalid input, please try again!")
             time.sleep(1)
             rolename = input("What is the role name? ")
         pplrole = input("How many are needed for " + rolename + " today? ")
         roles[rolename] = pplrole
-    # print(roles)
+    return roles
+
 
 # Reading Excel
 
 # Reading the excel to create a dictionary
 
 
-def reading():
-    spdsheet = (openpyxl.load_workbook("test.xlsx")).active
+def retrieveperson(roles):
+    def personlst():
+        aalst = []
+
+        # Going through the priority
+        for rl in range(2, spdsheet.max_row + 1):
+            rls = spdsheet.cell(rl, 4)
+            if priolstloop == rls.value:
+                aalst.append(rl)
+            # while (roles(priolstloop) != 0):
+        return aalst
+
+    ss = openpyxl.load_workbook("test.xlsx")
+    spdsheet = ss.active
+
+    # First loop through all the priority roles
+    for priolstloop in priolst:
+        # Check if this role is needed for the day, if it is continue on
+        if priolstloop in roles:
+            ppl = personlst()
+            while roles[priolstloop] != 0:
+                if len(ppl) == 0:
+                    print(
+                        "Not enough people for: "
+                        + priolstloop
+                        + ", still need "
+                        + str(roles[priolstloop])
+                        + " more people!"
+                    )
+                    break
+
+                person = random.choice(ppl)
+                spdsheet.cell(person, 8).value = priolstloop
+                roles[priolstloop] = int(roles[priolstloop]) - 1
+                ppl.remove(person)
+
+            print(roles)
+            ss.save("test.xlsx")
 
 
-startup()
+# Make a way to ensure people with more then one prio can get accesed (use str modifiers)
+# Make a way so that people already assigned do not get reassigned (a list of total people)
+
+
+r1 = startup()
+retrieveperson(r1)
