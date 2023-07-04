@@ -2,28 +2,10 @@
 
 # Libraries Needed
 # import pandas as pd
-# import re
+import re
 import openpyxl
 import time
 import random
-
-# namelst = []
-# #dataframe1 = pd.read_excel('test.xlsx')
-# dataframe = openpyxl.load_workbook("test.xlsx")
-
-# dataframe1 = dataframe.active
-# #names into list
-# for name in range(2, dataframe1.max_row+1):
-#     names = dataframe1.cell(name,2)
-#     namelst.append(names.value)
-
-# for j in range(2, dataframe1.max_row+1):
-#     answer = dataframe1.cell(j,4)
-#     nanswer = re.sub(",", "", str(answer.value))
-#     if "Stow" in nanswer.split():
-#         print(namelst[j-2])
-#         print(nanswer.split())
-# print(namelst)
 
 # def gui:
 # from tkinter import *
@@ -70,12 +52,14 @@ priolst = [
     "Clerk",
     "RSRTD",
     "RSROP",
+    "RSRPS",
     "DecantPS",
     "DockPD",
     "DockIDRT",
     "DockPS",
     "DoctCrets",
 ]
+usedppl = []
 
 
 # Might still have to ask which day of the week it is
@@ -107,20 +91,20 @@ def retrieveperson(roles):
         aalst = []
 
         # Going through the priority
-        for rl in range(2, spdsheet.max_row + 1):
-            rls = spdsheet.cell(rl, 4)
-            if priolstloop == rls.value:
-                aalst.append(rl)
-            # while (roles(priolstloop) != 0):
+        for row in range(2, spdsheet.max_row + 1):
+            rls = spdsheet.cell(row, 4)
+            rls1 = re.sub(",", "", str(rls.value))
+            # Checks for all their prios and makes sure person not used already
+            if (priolstloop in rls1.split()) and (row not in usedppl):
+                aalst.append(row)
         return aalst
-
-    ss = openpyxl.load_workbook("test.xlsx")
-    spdsheet = ss.active
 
     # First loop through all the priority roles
     for priolstloop in priolst:
         # Check if this role is needed for the day, if it is continue on
         if priolstloop in roles:
+            ss = openpyxl.load_workbook("test.xlsx")
+            spdsheet = ss.active
             ppl = personlst()
             while roles[priolstloop] != 0:
                 if len(ppl) == 0:
@@ -134,16 +118,22 @@ def retrieveperson(roles):
                     break
 
                 person = random.choice(ppl)
-                spdsheet.cell(person, 8).value = priolstloop
-                roles[priolstloop] = int(roles[priolstloop]) - 1
-                ppl.remove(person)
+
+                # Second check to make sure they not already used
+                if person not in usedppl:
+                    spdsheet.cell(person, 8).value = priolstloop
+                    usedppl.append(person)
+                    roles[priolstloop] = int(roles[priolstloop]) - 1
+                    ppl.remove(person)
+                else:
+                    ppl.remove(person)
 
             print(roles)
             ss.save("test.xlsx")
 
 
-# Make a way to ensure people with more then one prio can get accesed (use str modifiers)
-# Make a way so that people already assigned do not get reassigned (a list of total people)
+# Will now run for all the prio roles
+# Need to ask is this before lunch or after so I can clear excel or not
 
 
 r1 = startup()
