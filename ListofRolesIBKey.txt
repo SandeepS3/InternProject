@@ -1,0 +1,22 @@
+1."RSRTD" = RSR Turret Driver
+2."RSRPS" = RSR Problem Solver
+3."RSRWS" = RSR Waterspider
+4."RSROP" = RSR OP
+5."Decanter" = Decanter
+6."DecantPS" = Decant Problem Solver
+7."DecantWS" = Decant Waterspider
+8."TrailerUL" = Truck Unloader
+9."DockRun" = Dock Runner
+10."DockCRun" = Dock Central Runner
+11."DockLL" = Dock Line Loader
+12."DockDS" = Dock Down Stacker
+13."DockPD" = Dock Pit Driver
+14."DockIDRT" = Dock IDRT
+15."DockDeS" = Dock Destuffit
+16."DockPG" = Dock PG
+17."Crets" = CRETS
+18."DockCPB" = Dock Cart Pallet Builder **
+19."DockLI" = Dock Line Injector **
+20."DockPS" = Dock Problem Solver **
+21."Clerk" = Receive Clerk **
+Today's Code: DA7, DB1, DB3, DC7, DL6, DN2, DN4
