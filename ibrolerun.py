@@ -48,17 +48,6 @@ priolst = [
     "Stower",
     "PalletD",
 ]
-rotlst = [ 
-    "TrailerUL",
-    "DockDeS",
-    "DockRun",
-    "DockCRun",
-    "DockLL",
-    "DockCPB",
-    "DockDS",
-    "DockPD",
-    "DockLI",
-    "DockUPPC",]
 usedppl = []
 
 #Put roles and amount of people needed into dictionary
